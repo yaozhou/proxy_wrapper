@@ -1,5 +1,4 @@
 import React, { Component } from 'react' ;
-<<<<<<< HEAD
 import Button from 'react-bootstrap/lib/Button'
 import FormControl from 'react-bootstrap/lib/FormControl'
 
@@ -86,3 +85,18 @@ export default class extends Component {
             )
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
