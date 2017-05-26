@@ -19,37 +19,37 @@ export default class extends Component {
         }
     }
 
-    to_google() {
+    jump(url, server) {
 
-        var proxy_form = document.createElement('form') ;
-        proxy_form.id = 'proxy_form' ;
-        proxy_form.name = 'proxy_form' ;
+        var form = document.createElement('form') ;
+        form.id = 'proxy_form' ;
+        form.name = 'proxy_form' ;
 
-        document.body.appendChild(proxy_form) ;
+        document.body.appendChild(form) ;
 
-        var input1 = document.createElement('input1') ;
+        var input1 = document.createElement('input') ;
         input1.type = 'text' ;
         input1.name = 'u' ;
-        input1.value = 'https://www.google.com.hk' ;
+        input1.value = url ;
 
-        var input2 = document.createElement('input2') ;
+        var input2 = document.createElement('input') ;
         input2.type = 'text' ;
         input2.name = 'encodeURL' ;
         input2.value = 'on' ;
 
-        var input3 = document.createElement('input3') ;
+        var input3 = document.createElement('input') ;
         input3.type = 'text' ;
         input3.name = 'allowCookies' ;
         input3.value = 'on' ;
 
-        proxy_form.appendChild(input1) ;
-        proxy_form.appendChild(input2) ;
-        proxy_form.appendChild(input3) ;
-        proxy_form.method = "POST" ;
-        proxy_form.action = "http://www.zhangpeng.us/include/process.php?action=update"
-        proxy_form.submit() ;
+        form.appendChild(input1) ;
+        form.appendChild(input2) ;
+        form.appendChild(input3) ;
+        form.method = "POST" ;
+        form.action = server ;
+        form.submit() ;
 
-        document.body.removeChild(proxy_form) ;
+        document.body.removeChild(form) ;
     }
 
     componentDidMount() {
@@ -57,16 +57,22 @@ export default class extends Component {
     }
 
     verify(str) {
+
         console.log('verify =' + str) ;
         query('/api/verify', {verify_str: str}).then(function(ret) {
+            if (ret.code == 0) {
+                this.jump(ret.url, ret.server) ;
+            }else {
+                location.reload() ;
+            }
+
             console.log(ret) ;
-        })
+        }.bind(this))
     }
 
     render() {
         return (
             <div>
-            <div>test</div>
             <img src='verify_img' /> 
             <FormControl inputRef={ref => this.verify_input = ref} type ="text" />
             <Button onClick={() => this.verify(this.verify_input.value.trim())}>提交</Button>

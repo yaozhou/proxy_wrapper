@@ -32,7 +32,8 @@ app.get('/verify_img', function(req, res) {
 app.post('/api/verify', function(req, res) {
 	console.log('client verify = ' + JSON.stringify(req.body)) ;
 	if (req.body.verify_str == req.session['verify'])
-		res.send({code : 0}) ;
+		res.send({code : 0, url : 'https://www.google.com.hk', 
+			server: 'http://www.zhangpeng.us/includes/process.php?action=update'}) ;
 	else
 		res.send({code : 1}) ;
 })
