@@ -1,4 +1,5 @@
 import React, { Component } from 'react' ;
+<<<<<<< HEAD
 import Button from 'react-bootstrap/lib/Button'
 import FormControl from 'react-bootstrap/lib/FormControl'
 
@@ -12,12 +13,14 @@ function query(url, param) {
     return fetch(url, option).then((res) => res.json()) ;
 }
 
+
 export default class extends Component {
     constructor(props) {
         super(props) ;
         this.state = {
         }
     }
+
 
     jump(url, server) {
 
@@ -52,9 +55,11 @@ export default class extends Component {
         document.body.removeChild(form) ;
     }
 
+
     componentDidMount() {
       
     }
+
 
     verify(str) {
 
@@ -77,6 +82,7 @@ export default class extends Component {
             <FormControl inputRef={ref => this.verify_input = ref} type ="text" />
             <Button onClick={() => this.verify(this.verify_input.value.trim())}>提交</Button>
             </div>
+
             )
     }
 }
