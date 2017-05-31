@@ -56,12 +56,17 @@ export default class extends Component {
 
 
     componentDidMount() {
-      
+      //this.verify_input.focus() ;
+      document.onkeydown = function(e) {
+        if (e.keyCode == 13) {
+            this.verify() ;
+        }
+      }.bind(this)
     }
 
 
-    verify(str) {
-
+    verify() {
+        var str = this.verify_input.value.trim() ;
         console.log('verify =' + str) ;
         query('/api/verify', {verify_str: str}).then(function(ret) {
             if (ret.code == 0) {
@@ -76,10 +81,15 @@ export default class extends Component {
 
     render() {
         return (
-            <div>
+            
+            <div style={{display: 'flex', justifyContent: 'center'}}>
+            <div style={{"marginTop":"200px"}}>
             <img src='verify_img' /> 
-            <FormControl inputRef={ref => this.verify_input = ref} type ="text" />
-            <Button onClick={() => this.verify(this.verify_input.value.trim())}>提交</Button>
+            <FormControl inputRef={ref => this.verify_input = ref} type ="text" autoFocus="autofocus"/>
+            <center>
+            <Button onClick={() => this.verify()}>提交</Button>
+            </center>
+            </div>
             </div>
 
             )
