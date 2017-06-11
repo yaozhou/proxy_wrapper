@@ -63,14 +63,14 @@ export default class extends Component {
         }
       }.bind(this)
     }
-
-
+    
     verify() {
         var str = this.verify_input.value.trim() ;
         console.log('verify =' + str) ;
         query('/api/verify', {verify_str: str}).then(function(ret) {
             if (ret.code == 0) {
-                this.jump(ret.url, ret.server) ;
+                parent.postMessage({url:ret.url,server: ret.server}, '*') ;
+                //this.jump(ret.url, ret.server) ;
             }else {
                 location.reload() ;
             }
